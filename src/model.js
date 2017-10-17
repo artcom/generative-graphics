@@ -1,49 +1,13 @@
 import Backbone from "backbone-model"
 
 export const noiseTextures = [
-  "perlin-noise-seamless-rgb-512.png",
-  "perlin-noise-seamless-rgb-512-2.png",
-  "perlin-noise-seamless-rgb-512-3.png",
-  "perlin_seamless_test.png",
-  "rgb_compose_rot1.jpg",
-  "rotmodule.jpg",
-  "test.jpg",
-  "rgb_compose_rot_l.jpg"
+  "perlin-noise-seamless-rgb-512.png"
 ]
 export const colorTextures = [
-  "None",
-  "perlin_noise_seamless_blue_512.png",
-  "color_noise_magenta_512.png",
-  "color_noise_rgb_512.png",
-  "color_noise_rgb_neon_512.png",
-  "weather_blue.png",
-  "noise_grey.png",
-  "noise_gold.png",
-  "color_morning_glory.png",
-  "mixed.jpg",
-  "work_nature.png",
-  "work_nature_new.png",
-  "work_nature_new_2.png"
+  "None"
 ]
 export const backgroundTextures = [
-  "None",
-  "bg_grey_spot.jpg",
-  "bg_warm_vignette.png",
-  "bg_light_top_left.jpg",
-  "bg_light_spot_top.jpg",
-  "bg_light_spot_top_bright.jpg",
-  "bg_light_spot_center.jpg",
-  "bg_gradient_bright_bottom.jpg",
-  "bg_morning.jpg",
-  "bg_morning_2.jpg",
-  "bg_guests_spot_center.jpg",
-  "bg_soft_spot_center.jpg",
-  "bg_morning_colourful.jpg",
-  "bg_morning_colourful.png",
-  "bg_guests.jpg",
-  "bg_guests.png",
-  "bg_grey_spot.png",
-  "bg_soft_spot_center.png"
+  "None"
 ]
 export const morph = ["off", "forwards", "backwards"]
 export const objects3d = ["THREE.Mesh", "THREE.Points"]
