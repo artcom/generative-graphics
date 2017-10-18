@@ -48,10 +48,12 @@ export const noiseTextures = [
   ...,
   <add name of noise file here>
 ]
+
 export const colorTextures = [
   ...,
   <add name of color file here>
 ]
+
 export const backgroundTextures = [
   ...,
   <add name of background file here>
