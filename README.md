@@ -1,4 +1,4 @@
-# Generative Graphic
+# Generative Graphics
 
 Generative and animated graphic. The basic motion of the graphic is controlled by a Perlin Noise RGB texture.
 
