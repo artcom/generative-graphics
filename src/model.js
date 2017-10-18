@@ -4,10 +4,13 @@ export const noiseTextures = [
   "perlin-noise-seamless-rgb-512.png"
 ]
 export const colorTextures = [
-  "None"
+  "None",
+  "color-texture-1-rgb-512.png",
+  "color-texture-2-rgb-512.png"
 ]
 export const backgroundTextures = [
-  "None"
+  "None",
+  "radial-gradient-1920.jpg"
 ]
 export const morph = ["off", "forwards", "backwards"]
 export const objects3d = ["THREE.Mesh", "THREE.Points"]

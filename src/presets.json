@@ -1,14 +1,24 @@
 {
-  "preset": "party_sticks_3",
+  "preset": "default",
   "closed": false,
   "remembered": {
     "default": {
       "0": {
         "noiseTexture": "perlin-noise-seamless-rgb-512.png",
-        "colorTexture": "None",
-        "geometry": "THREE.SphereGeometry",
-        "scale": 0.015,
+        "colorTexture": "color-texture-1-rgb-512.png",
+        "object3d": "THREE.Mesh",
+        "geometry": "THREE.PlaneGeometry",
+        "preserveDrawingBuffer": true,
+        "planeOpacity": 0.07753552234573763,
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "backgroundTexture": "radial-gradient-1920.jpg",
+        "scale": 0.15507104469147526,
         "wireframe": false,
+        "lineWidth": 1,
         "ambientLight": [
           255,
           0,
@@ -18,33 +28,25 @@
         "directionalLightY": false,
         "directionalLightZ": true,
         "pointLight1": true,
-        "pointLight2": false,
-        "lineWidth": 1,
+        "pointLight2": true,
         "morph": "off",
-        "morphStep": 0,
-        "segmentsX": 64,
-        "segmentsY": 64,
-        "rotationSpeedX": 0.1,
-        "rotationSpeedY": 0.1,
-        "rotationSpeedZ": 0,
-        "rotationX": 2.82,
-        "rotationY": 0.15,
-        "rotationZ": 0,
+        "morphStep": 0.12184153511473056,
+        "segmentsX": 91,
+        "segmentsY": 79,
+        "rotationSpeedX": 0.0332295095767447,
+        "rotationSpeedY": 0.0332295095767447,
+        "rotationSpeedZ": 0.0332295095767447,
+        "rotationX": 2.3833506357185628,
+        "rotationY": 1.6863889494714672,
+        "rotationZ": 5.7415729448177375,
         "zoom": 3,
         "cameraPosZ": 1.5,
         "depthTest": false,
-        "speed": 0.05,
-        "opacity": 0.07586792910900708,
+        "speed": 0.952579274533348,
+        "blending": "NormalBlending",
+        "opacity": 0.07753552234573763,
         "pause": false,
-        "object3d": "THREE.Mesh",
-        "pointSize": 1,
-        "preserveDrawingBuffer": true,
-        "planeOpacity": 0.021676551174002023,
-        "background": [
-          255,
-          225,
-          225
-        ]
+        "pointSize": 1
       }
     }
   },
