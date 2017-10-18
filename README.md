@@ -60,4 +60,4 @@ export const backgroundTextures = [
 
 ### Change parameters
 
-Open http://localhost:5000/webpack-dev-server/?debug=true to open the UI to change graphic parameters. Changes can be exported as presets. Presets can be added to the presets.json to make them available.
+Open http://localhost:5000/webpack-dev-server/?debug=true to show the UI to change graphic parameters. Changes can be exported as presets. Presets can be added to the presets.json to make them available.
