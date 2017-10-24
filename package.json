@@ -2,8 +2,8 @@
   "name": "generative-graphic",
   "private": true,
   "scripts": {
-    "watch": "NODE_ENV=development webpack-dev-server -d",
-    "start": "NODE_ENV=production webpack -p && http-server ./public -p $PORT -c 0"
+    "watch": "webpack-dev-server -d",
+    "start": "webpack -p && http-server ./public"
   },
   "engines": {
     "node": "6.7.0"

@@ -19,9 +19,6 @@ module.exports = {
       { test: /\.glsl$/, exclude: /node_modules/, loader: "raw-loader" }
     ]
   },
-  plugins: [
-    new webpack.EnvironmentPlugin(["NODE_ENV"])
-  ],
   devServer: {
     contentBase: publicPath,
     port: 5000,
