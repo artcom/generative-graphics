@@ -4,8 +4,8 @@
   "remembered": {
     "default": {
       "0": {
-        "noiseTexture": "perlin-noise-seamless-rgb-512.png",
-        "colorTexture": "color-texture-1-rgb-512.png",
+        "noiseTexture": "default",
+        "colorTexture": "None",
         "object3d": "THREE.Mesh",
         "geometry": "THREE.PlaneGeometry",
         "preserveDrawingBuffer": true,
@@ -15,7 +15,7 @@
           255,
           255
         ],
-        "backgroundTexture": "radial-gradient-1920.jpg",
+        "backgroundTexture": "default",
         "scale": 0.15507104469147526,
         "wireframe": false,
         "lineWidth": 1,

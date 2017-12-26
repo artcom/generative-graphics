@@ -6,6 +6,10 @@ import MouseControls from "./MouseControls"
 import vertexShader from "./shader/vertexShader.glsl"
 import fragmentShader from "./shader/fragmentShader.glsl"
 
+import defaultNoiseImage from "../assets/textures/noise/default-noise-texture.png"
+import defaultBackgroundImage from "../assets/textures/background/default-background.jpg"
+import defaultColorImage from "../assets/textures/color/default-color-texture.png"
+
 export default class View {
   constructor(model) {
     this.model = model
@@ -188,8 +192,10 @@ export default class View {
 
       if (value === "None") {
         material.map = null
+      } else if (value === "default") {
+        material.map = THREE.ImageUtils.loadTexture(defaultBackgroundImage)
       } else {
-        material.map = THREE.ImageUtils.loadTexture(`textures/background/${value}`)
+        material.map = THREE.ImageUtils.loadTexture(`textures/${value}`)
       }
 
       material.needsUpdate = true
@@ -243,15 +249,14 @@ export default class View {
   }
 
   loadNoiseTexture() {
-    this.loadTexture(`textures/noise/${this.model.attributes.noiseTexture}`, "uNoiseTexture")
+    this.loadTexture(defaultNoiseImage, "uNoiseTexture")
   }
 
   loadColorTexture() {
-    const { colorTexture, noiseTexture } = this.model.attributes
+    const { colorTexture } = this.model.attributes
 
-    const path = colorTexture === "None" ?
-      `textures/noise/${noiseTexture}` :
-      `textures/color/${colorTexture}`
+    const path = colorTexture === "None" ? defaultNoiseImage :
+      `textures/${colorTexture}`
 
     this.loadTexture(path, "uColorTexture")
   }
@@ -389,9 +394,10 @@ export default class View {
 
     const backgroundPlane = new THREE.Mesh(geometry, material)
 
-    if (backgroundTexture !== "None") {
-      const path = `textures/background/${backgroundTexture}`
-      backgroundPlane.material.map = THREE.ImageUtils.loadTexture(path)
+    if (backgroundTexture === "default") {
+      backgroundPlane.material.map = THREE.ImageUtils.loadTexture(defaultBackgroundImage)
+    } else {
+      backgroundPlane.material.map = THREE.ImageUtils.loadTexture(`textures/${backgroundTexture}`)
     }
 
     backgroundPlane.material.depthTest = false

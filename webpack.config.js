@@ -10,13 +10,48 @@ module.exports = {
     filename: "bundle.js"
   },
   module: {
-    preLoaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "eslint-loader" }
-    ],
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-      { test: /\.json$/, exclude: /node_modules/, loader: "json-loader" },
-      { test: /\.glsl$/, exclude: /node_modules/, loader: "raw-loader" }
+    rules: [
+      {
+        oneOf: [
+          {
+            test: /\.(png|jpg|gif)$/,
+            use: [
+              {
+                loader: "file-loader",
+                options: {}
+              }
+            ],
+            exclude: /node_modules/
+          },
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: [
+              {
+                loader: "babel-loader"
+              }
+            ]
+          },
+          {
+            test: /\.json$/,
+            exclude: /node_modules/,
+            use: [
+              {
+                loader: "json-loader"
+              }
+            ]
+          },
+          {
+            test: /\.glsl$/,
+            exclude: /node_modules/,
+            use: [
+              {
+                loader: "raw-loader"
+              }
+            ]
+          }
+        ]
+      },
     ]
   },
   devServer: {
