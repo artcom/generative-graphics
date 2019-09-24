@@ -11,8 +11,9 @@ import defaultBackgroundImage from "../assets/textures/background/default-backgr
 import defaultColorImage from "../assets/textures/color/default-color-texture.png"
 
 export default class View {
-  constructor(model) {
+  constructor(model, container) {
     this.model = model
+    this.container = container
 
     this.subscribeToModel()
 
@@ -32,7 +33,10 @@ export default class View {
     }
 
     this.shaderMaterial = this.createShaderMaterial()
-    this.object3D = this.createObject3D(this.createGeometry(), this.shaderMaterial)
+    this.object3D = this.createObject3D(
+      this.createGeometry(),
+      this.shaderMaterial
+    )
     this.scene.add(this.object3D)
 
     this.backgroundScene = new THREE.Scene()
@@ -63,7 +67,10 @@ export default class View {
 
     this.model.on("change:object3d", () => {
       this.scene.remove(this.object3D)
-      this.object3D = this.createObject3D(this.object3D.geometry, this.shaderMaterial)
+      this.object3D = this.createObject3D(
+        this.object3D.geometry,
+        this.shaderMaterial
+      )
       this.scene.add(this.object3D)
     })
 
@@ -85,7 +92,11 @@ export default class View {
 
     this.model.on("change:ambientLight", (model, value) => {
       const { r, g, b } = this.getColor(value)
-      this.object3D.material.uniforms.uAmbientLight.value = new THREE.Vector3(r, g, b)
+      this.object3D.material.uniforms.uAmbientLight.value = new THREE.Vector3(
+        r,
+        g,
+        b
+      )
     })
 
     this.model.on("change:directionalLightX", (model, value) => {
@@ -204,12 +215,12 @@ export default class View {
 
   updateRenderer() {
     if (this.renderer) {
-      document.body.removeChild(this.renderer.domElement)
+      this.container.removeChild(this.renderer.domElement)
     }
 
     this.renderer = this.createRenderer()
 
-    document.body.appendChild(this.renderer.domElement)
+    this.container.appendChild(this.renderer.domElement)
 
     this.updateMouseControls()
   }
@@ -219,9 +230,15 @@ export default class View {
       this.mouseControls.removeEventHandlers()
     }
 
-    this.mouseControls = new MouseControls(this.renderer.domElement, (deltaQuaternion) => {
-      this.object3D.quaternion.multiplyQuaternions(deltaQuaternion, this.object3D.quaternion)
-    })
+    this.mouseControls = new MouseControls(
+      this.renderer.domElement,
+      deltaQuaternion => {
+        this.object3D.quaternion.multiplyQuaternions(
+          deltaQuaternion,
+          this.object3D.quaternion
+        )
+      }
+    )
   }
 
   createRenderer() {
@@ -255,14 +272,14 @@ export default class View {
   loadColorTexture() {
     const { colorTexture } = this.model.attributes
 
-    const path = colorTexture === "None" ? defaultNoiseImage :
-      `textures/${colorTexture}`
+    const path =
+      colorTexture === "None" ? defaultNoiseImage : `textures/${colorTexture}`
 
     this.loadTexture(path, "uColorTexture")
   }
 
   loadTexture(filePath, uniformName) {
-    new THREE.TextureLoader().load(filePath, (texture) => {
+    new THREE.TextureLoader().load(filePath, texture => {
       texture.wrapT = texture.wrapS = THREE.RepeatWrapping
       this.object3D.material.uniforms[uniformName].value = texture
     })
@@ -322,9 +339,10 @@ export default class View {
   createObject3D(geometry, material) {
     const attributes = this.model.attributes
 
-    const object3D = attributes.object3d === "THREE.Points" ?
-        new THREE.Points(geometry, material) :
-        new THREE.Mesh(geometry, material)
+    const object3D =
+      attributes.object3d === "THREE.Points"
+        ? new THREE.Points(geometry, material)
+        : new THREE.Mesh(geometry, material)
 
     object3D.rotation.x = attributes.rotationX
     object3D.rotation.y = attributes.rotationY
@@ -339,7 +357,14 @@ export default class View {
     if (geometry === "THREE.SphereGeometry") {
       return new THREE.SphereGeometry(1.0, segmentsX, segmentsY)
     } else if (geometry === "THREE.BoxGeometry") {
-      return new THREE.BoxGeometry(1.0, 1.0, 1.0, segmentsX, segmentsX, segmentsX)
+      return new THREE.BoxGeometry(
+        1.0,
+        1.0,
+        1.0,
+        segmentsX,
+        segmentsX,
+        segmentsX
+      )
     } else if (geometry === "THREE.TorusKnotGeometry") {
       return new THREE.TorusKnotGeometry(1.0, 0.3, segmentsX, segmentsY)
     } else if (geometry === "THREE.PlaneGeometry") {
@@ -373,7 +398,8 @@ export default class View {
           uColorTexture: { type: "t" },
           uOpacity: { type: "f", value: attributes.opacity },
           uAmbientLight: {
-            type: "v3", value: new THREE.Vector3(r, g, b)
+            type: "v3",
+            value: new THREE.Vector3(r, g, b)
           },
           uPointSize: { type: "f", value: attributes.pointSize }
         }
@@ -382,7 +408,11 @@ export default class View {
   }
 
   createBackgroundPlane() {
-    const { background, backgroundTexture, planeOpacity } = this.model.attributes
+    const {
+      background,
+      backgroundTexture,
+      planeOpacity
+    } = this.model.attributes
     const geometry = new THREE.PlaneGeometry(2, 2)
 
     const { r, g, b } = this.getColor(background)
@@ -395,9 +425,13 @@ export default class View {
     const backgroundPlane = new THREE.Mesh(geometry, material)
 
     if (backgroundTexture === "default") {
-      backgroundPlane.material.map = THREE.ImageUtils.loadTexture(defaultBackgroundImage)
+      backgroundPlane.material.map = THREE.ImageUtils.loadTexture(
+        defaultBackgroundImage
+      )
     } else {
-      backgroundPlane.material.map = THREE.ImageUtils.loadTexture(`textures/${backgroundTexture}`)
+      backgroundPlane.material.map = THREE.ImageUtils.loadTexture(
+        `textures/${backgroundTexture}`
+      )
     }
 
     backgroundPlane.material.depthTest = false
@@ -456,7 +490,11 @@ export default class View {
       backwards: -1
     }[morph]
 
-    const newMorphStep = clamp(morphStep + factor * deltaTime * speed * 0.01, 0, 1)
+    const newMorphStep = clamp(
+      morphStep + factor * deltaTime * speed * 0.01,
+      0,
+      1
+    )
 
     if (!pause) {
       this.model.set({ morphStep: newMorphStep })
@@ -465,7 +503,12 @@ export default class View {
   }
 
   updateRotation(deltaTime) {
-    const { pause, rotationSpeedX, rotationSpeedY, rotationSpeedZ } = this.model.attributes
+    const {
+      pause,
+      rotationSpeedX,
+      rotationSpeedY,
+      rotationSpeedZ
+    } = this.model.attributes
     const objectRotation = this.object3D.rotation
 
     if (!pause) {

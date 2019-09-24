@@ -4,10 +4,9 @@ import View from "./view"
 import Gui from "./gui"
 
 export default class GenerativeGraphics {
-
-  constructor(preset = "default", debug = false) {
+  constructor(preset = "default", debug = false, container) {
     this.model = new Model(presets.remembered[preset][0])
-    this.view = new View(this.model)
+    this.view = new View(this.model, container)
 
     if (debug === "true") {
       const gui = new Gui(preset, this.model)
