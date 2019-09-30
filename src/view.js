@@ -6,9 +6,9 @@ import MouseControls from "./MouseControls"
 import vertexShader from "./shader/vertexShader.glsl"
 import fragmentShader from "./shader/fragmentShader.glsl"
 
-import defaultNoiseImage from "../assets/textures/noise/default-noise-texture.png"
-import defaultBackgroundImage from "../assets/textures/background/default-background.jpg"
-import defaultColorImage from "../assets/textures/color/default-color-texture.png"
+import defaultNoiseImage from "../assets/textures/noise/default.png"
+import defaultBackgroundImage from "../assets/textures/background/default.jpg"
+import defaultColorImage from "../assets/textures/color/default.png"
 
 export default class View {
   constructor(model, container) {
@@ -272,8 +272,12 @@ export default class View {
   loadColorTexture() {
     const { colorTexture } = this.model.attributes
 
+    console.log(colorTexture)
+
     const path =
-      colorTexture === "None" ? defaultNoiseImage : `textures/${colorTexture}`
+      colorTexture === "None" ? defaultColorImage : `textures/${colorTexture}`
+
+    console.log(path)
 
     this.loadTexture(path, "uColorTexture")
   }

@@ -1,16 +1,8 @@
 import Backbone from "backbone-model"
 
-export const noiseTextures = [
-  "default"
-]
-export const colorTextures = [
-  "None",
-  "default"
-]
-export const backgroundTextures = [
-  "None",
-  "default"
-]
+export const noiseTextures = ["default"]
+export const colorTextures = ["None", "default"]
+export const backgroundTextures = ["None", "default"]
 export const morph = ["off", "forwards", "backwards"]
 export const objects3d = ["THREE.Mesh", "THREE.Points"]
 export const geometries = [
@@ -33,7 +25,7 @@ export default class Model extends Backbone.Model {
       noiseTexture: noiseTextures[0],
       colorTexture: colorTextures[0],
       backgroundTexture: backgroundTextures[0],
-      geometry: geometries[0],
+      geometry: geometries[2],
       object3d: objects3d[0],
       pointSize: 1.0,
       wireframe: false,
@@ -45,11 +37,11 @@ export default class Model extends Backbone.Model {
       rotationSpeedY: 0.01,
       rotationSpeedZ: 0,
       zoom: 1,
-      cameraPosZ: 1.5,
+      cameraPosZ: 5,
       speed: 0.05,
       pause: false,
       morph: morph[0],
-      morphStep: 0.0,
+      morphStep: 1.0,
       background: [255, 255, 255],
       blending: blendingFunctions[0],
       opacity: 0.1,
