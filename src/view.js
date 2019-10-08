@@ -144,6 +144,12 @@ export default class View {
       this.object3D.geometry = this.createGeometry()
     })
 
+    this.model.on("change:quaternion", (model, value) => {
+      this.object3D.setRotationFromQuaternion(
+        new THREE.Quaternion(value[1], value[2], value[3], value[0])
+      )
+    })
+
     this.model.on("change:rotationX", (model, value) => {
       this.object3D.rotation.x = value
     })
