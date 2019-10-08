@@ -19,13 +19,7 @@ export default class GenerativeGraphics {
     this.view.render()
   }
 
-  updateRotation(rotation) {
-    this.model.set({ rotationX: rotation[0] })
-    this.model.set({ rotationY: rotation[1] })
-    this.model.set({ rotationZ: rotation[2] })
-  }
-
-  updateColor(color) {
-    this.model.set({ ambientLight: [color[0], color[1], color[2]] })
+  updateModel(model) {
+    this.model.set(model)
   }
 }
