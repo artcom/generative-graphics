@@ -1,4 +1,4 @@
-import THREE from "three"
+import * as THREE from "three"
 import Stats from "stats-js"
 
 import MouseControls from "./MouseControls"
@@ -240,7 +240,7 @@ export default class View {
 
     renderer.sortObjects = false
 
-    renderer.context.getExtension("OES_standard_derivatives")
+    renderer.getContext().getExtension("OES_standard_derivatives")
     renderer.setClearColor(0xffffff, 1)
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setPixelRatio(window.devicePixelRatio)

@@ -1,4 +1,4 @@
-import THREE from "three"
+import * as THREE from "three"
 
 export default class MouseControls {
 
@@ -24,10 +24,10 @@ export default class MouseControls {
 
       if (this.isDragging) {
         const deltaQuaternion = new THREE.Quaternion().setFromEuler(new THREE.Euler(
-            this.toRadians(deltaMove.y),
-            this.toRadians(deltaMove.x),
-            0,
-            "XYZ"
+          this.toRadians(deltaMove.y),
+          this.toRadians(deltaMove.x),
+          0,
+          "XYZ"
         ))
 
         this.callback(deltaQuaternion)
