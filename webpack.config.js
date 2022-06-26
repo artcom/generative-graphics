@@ -1,7 +1,7 @@
-var path = require("path")
-var webpack = require("webpack")
+const path = require("path")
+const webpack = require("webpack")
 
-var publicPath = path.join(__dirname, "public")
+const publicPath = path.join(__dirname, "public")
 
 module.exports = {
   entry: "./src/main.js",
@@ -56,7 +56,7 @@ module.exports = {
   },
   devServer: {
     contentBase: publicPath,
-    port: 5000,
+    port: 5001,
     host: "0.0.0.0"
   }
 }

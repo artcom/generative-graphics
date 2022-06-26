@@ -1,4 +1,6 @@
 import * as THREE from "three"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+
 import Stats from "stats-js"
 
 import MouseControls from "./MouseControls"
@@ -19,9 +21,6 @@ export default class View {
     this.clock = new THREE.Clock(false)
     this.step = 0.0
 
-    this.loadNoiseTexture()
-    this.loadColorTexture()
-
     this.updateRenderer()
 
     this.scene = new THREE.Scene()
@@ -32,8 +31,6 @@ export default class View {
     }
 
     this.shaderMaterial = this.createShaderMaterial()
-    this.object3D = this.createObject3D(this.createGeometry(), this.shaderMaterial)
-    this.scene.add(this.object3D)
 
     this.backgroundScene = new THREE.Scene()
     this.backgroundCamera = new THREE.Camera()
@@ -46,6 +43,37 @@ export default class View {
     this.statsVisible = false
 
     window.addEventListener("resize", this.onWindowResize.bind(this), false)
+  }
+
+  init() {
+    const gltfLoader = new GLTFLoader().setPath("gltf/Fox/glTF/");
+    gltfLoader.load('Fox.gltf', function (gltf) {
+      const model = gltf.scene;
+
+      model.position.y = -0.3
+
+      model.scale.x = 0.005
+      model.scale.y = 0.005
+      model.scale.z = 0.005
+
+      model.traverse((o) => {
+        if (o.isMesh) {
+          console.log(o)
+          o.material = this.shaderMaterial
+        }
+      })
+
+      this.object3D = model.children[0].children[1]
+      this.scene.add(this.object3D)
+
+      this.modelLoaded = true
+
+      this.loadNoiseTexture()
+      this.loadColorTexture()
+
+      this.render()
+
+    }.bind(this));
   }
 
   subscribeToModel() {
@@ -264,7 +292,14 @@ export default class View {
   loadTexture(filePath, uniformName) {
     new THREE.TextureLoader().load(filePath, (texture) => {
       texture.wrapT = texture.wrapS = THREE.RepeatWrapping
+
+      // this.object3D.traverse((o) => {
+      //   if (o.isMesh) {
+      //     o.material.uniforms[uniformName].value = texture
+      //   }
+      // })
       this.object3D.material.uniforms[uniformName].value = texture
+      
     })
   }
 
@@ -323,8 +358,8 @@ export default class View {
     const attributes = this.model.attributes
 
     const object3D = attributes.object3d === "THREE.Points" ?
-        new THREE.Points(geometry, material) :
-        new THREE.Mesh(geometry, material)
+      new THREE.Points(geometry, material) :
+      new THREE.Mesh(geometry, material)
 
     object3D.rotation.x = attributes.rotationX
     object3D.rotation.y = attributes.rotationY

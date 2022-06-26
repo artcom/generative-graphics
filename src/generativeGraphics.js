@@ -17,6 +17,6 @@ export default class GenerativeGraphics {
   }
 
   start() {
-    this.view.render()
+    this.view.init()
   }
 }
